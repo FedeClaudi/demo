@@ -5,4 +5,4 @@ from myterial import (
 )
 
 from demo.gaussian import Gaussian
-from demo.plot import Figure
+from demo.plot.figure import Figure

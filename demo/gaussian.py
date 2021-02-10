@@ -6,10 +6,12 @@ from myterial import salmon_light
 class Gaussian:
     xrange = [0.0001, 0.9999]
 
-    def __init__(self, mu=0, sigma=1, color=salmon_light):
+    def __init__(self, mu=0, sigma=1, color=salmon_light, label=None, mu_label=None):
         self.mu = mu
         self.sigma = sigma
         self.color = color
+        self.label = label
+        self.mu_label = mu_label
 
     def __mul__(self, other):
         mu_one, sigma_one = self.mu, self.sigma
@@ -39,3 +41,10 @@ class Gaussian:
     @property
     def pdf(self):
         return self.distribution.pdf(self.support)
+
+    @property
+    def peak(self):
+        '''
+            Value at the mean
+        '''
+        return self.distribution.pdf(self.mu)
