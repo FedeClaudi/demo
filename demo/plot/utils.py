@@ -27,7 +27,7 @@ def clean_axes(f):
 
     for ax in list(ax_list):
         try:
-            sns.despine(ax=ax, offset=1, trim=True, left=False, right=True)
+            sns.despine(ax=ax, offset=0, trim=True, left=False, right=True)
         except:
             pass
 
@@ -38,6 +38,7 @@ def make_axes_at_center(ax):
     """
     # Move left y-axis and bottim x-axis to centre, passing through (0,0)
     ax.spines["left"].set_position("zero")
+    ax.spines["bottom"].set_position("zero")
 
     # Eliminate upper and right axes
     ax.spines["right"].set_color("none")

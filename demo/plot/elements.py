@@ -1,7 +1,7 @@
 from demo import plot
 
 def plot_line_outlined(
-    ax, x, y=None, lw=4, outline=1, outline_color=[.3, .3, .3], color="r", **kwargs
+    ax, x, y=None, lw=4, outline=2, outline_color=[.3, .3, .3], color="r", **kwargs
 ):
     '''
         Plots a line with a darker outline around it
@@ -29,14 +29,14 @@ def label_point(ax, x, y, text, below=False, right=False, color='k'):
     '''
         Add some text to label a point
     '''
-    xshift = .02 if not right else -.02
-    yshift = .01 if not below else -.01
+    xshift = .025 if not right else -.025
+    yshift = .005 if not below else -.005
     ax.text(
         x + xshift,
         y + yshift,
         text,
         horizontalalignment='left' if not right else 'right',
-        verticalalignment='below' if not below else 'top',
+        verticalalignment='bottom' if not below else 'top',
         fontsize=14,
         fontweight='bold',
         color=color,
