@@ -139,8 +139,9 @@ class Likelihood(Gaussian):
         self.label='likelihood:\n  $L(S_{hyp})=p_{x|s}(X_{obs}|S_{hyp})$'
         self.mu_label='$X_{obs}$'
 
-def Posterior(posterior):
-    posterior.color = indigo_light
-    posterior.label = 'posterior:\n  $p_{s|x}(S_{hyp} | X_{obs})$'  # specify label
-    posterior.mu_label = '$\\hat{S}_{PM}$'  # label x=mu in plot
-    return posterior
+class Posterior(Gaussian):
+    def __init__(self, mu=0, sigma=1, **kwargs):
+        Gaussian.__init__(self, mu=mu, sigma=sigma, **kwargs)
+        self.color = indigo_light
+        self.label = 'posterior:\n  $p_{s|x}(S_{hyp} | X_{obs})$'  # specify label
+        self.mu_label = '$\\hat{S}_{PM}$'  # label x=mu in plot

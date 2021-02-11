@@ -1,4 +1,4 @@
-from demo import Prior, Likelihood, Posterior, Figure
+from demo import Gaussian, Prior, Likelihood, Posterior, Figure
 
 
 # create prior and likelihood distributions
@@ -11,9 +11,24 @@ likelihood = Likelihood(
     mu=3.8, sigma=1, 
 )
 
-# compute posterior by multiplying the two
-posterior = Posterior(prior * likelihood)
+# compute posterior's mean and standard deviation
+posterior_mu = (
+        (prior.mu / prior.sigma ** 2) + (likelihood.mu / likelihood.sigma ** 2)
+    ) / (
+        (1 / prior.sigma ** 2) + (1 / likelihood.sigma ** 2)
+    )
 
+posterior_sigma = (
+        1 
+    ) / (
+        (1 / prior.sigma ** 2) + (1 / likelihood.sigma ** 2)
+    )
+
+# create a 'poterior' object for plotting
+posterior = Posterior(
+    mu=posterior_mu,
+    sigma=posterior_sigma,
+)
 
 # create a figure
 figure = Figure(
