@@ -9,10 +9,11 @@ from demo import plot
 @dataclass
 class GaussianPlottingParameters:
     label: str = None
-    label_side: str = 'right'
+    label_side: str = 'left'
 
     mark_mu: bool = True
     mu_label: str = None
+    mu_label_side: str = 'left'
 
     color: str = salmon_light
     plot_shaded: bool = True
@@ -112,6 +113,7 @@ class Gaussian(GaussianPlottingParameters):
                 0,
                 self.mu_label,
                 below=True,
+                right=False if self.mu_label_side == 'left' else True,
                 color=plot.utils.darken_color(self.color, .3),
             )
 
@@ -122,7 +124,7 @@ class Gaussian(GaussianPlottingParameters):
                 self.mu,
                 self.peak,
                 self.label,
-                right=True if self.label_side == 'left' else False,
+                right=False if self.label_side == 'left' else True,
                 color=plot.utils.darken_color(self.color, .3),
             )
 

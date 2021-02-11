@@ -4,7 +4,7 @@ from demo import Gaussian, Prior, Likelihood, Posterior, Figure
 # create prior and likelihood distributions
 prior = Prior(
     mu=0, sigma=2.5, 
-    mark_mu=False, label_side='left'
+    mark_mu=False, label_side='right'
 )
 
 likelihood = Likelihood(
@@ -28,6 +28,7 @@ posterior_sigma = (
 posterior = Posterior(
     mu=posterior_mu,
     sigma=posterior_sigma,
+    mu_label_side = 'right'
 )
 
 # create a figure

@@ -29,14 +29,14 @@ def label_point(ax, x, y, text, below=False, right=False, color='k'):
     '''
         Add some text to label a point
     '''
-    xshift = .025 if not right else -.025
-    yshift = .005 if not below else -.005
+    xshift = .02 if not right else (-.3 if not below else -.015)
+    yshift = .01 if not below else -.015
     ax.text(
         x + xshift,
         y + yshift,
         text,
         horizontalalignment='left' if not right else 'right',
-        verticalalignment='bottom' if not below else 'top',
+        verticalalignment='center' if not below else 'top',
         fontsize=14,
         fontweight='bold',
         color=color,

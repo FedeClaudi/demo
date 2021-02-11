@@ -5,8 +5,8 @@ from myterial import grey_darker, grey_dark
 from  matplotlib import rc
 
 # set latex
-rc('font', **{'family': 'sans-serif', 'sans-serif': ['Times-Roman']})
-rc('text', usetex = True)
+# rc('font', **{'family': 'sans-serif', 'sans-serif': ['Times-Roman']})
+# rc('text', usetex = True)
 
 # set axes style
 rc('text', color=grey_dark)
