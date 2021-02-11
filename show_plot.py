@@ -8,7 +8,7 @@ prior = Prior(
 )
 
 likelihood = Likelihood(
-    mu=3.8, sigma=1, 
+    mu=4, sigma=1, 
 )
 
 # compute posterior's mean and standard deviation
@@ -37,7 +37,7 @@ figure = Figure(
     ylabel="Probability or likelihood",
 )
 
-# add gaussian distributions to plot
+# add elements to plot
 figure.add(prior, likelihood, posterior)
 
 # show figure
