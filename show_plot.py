@@ -14,7 +14,6 @@ likelihood = Likelihood(
 # compute posterior by multiplying the two
 posterior = Posterior(prior * likelihood)
 
-
 # create a figure
 figure = Figure(
     title='Fig. 3.5',
@@ -22,7 +21,7 @@ figure = Figure(
     ylabel="Probability or likelihood",
 )
 
-# add gaussian distributions to plot
+# add elements to plot
 figure.add(prior, likelihood, posterior)
 
 # show figure
