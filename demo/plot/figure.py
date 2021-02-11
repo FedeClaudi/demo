@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 
 from demo import plot
-from demo.gaussian import Gaussian, plot_gaussian
 
 class Figure():
     def __init__(self, title=None, xlabel='', ylabel='', show_y_ticks=False):
@@ -26,10 +25,7 @@ class Figure():
             Add objects (e.g. gaussian distributions).
         '''
         for obj in objs:
-            if isinstance(obj, Gaussian):
-                plot_gaussian(obj, self.ax)
-            else:
-                raise NotImplementedError
+            obj.draw(self.ax)
 
 
     def show(self):

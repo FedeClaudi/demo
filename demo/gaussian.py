@@ -2,7 +2,7 @@ import numpy as np
 from scipy.stats import norm as Normal
 from dataclasses import dataclass
 
-from myterial import salmon_light
+from myterial import salmon_light, salmon, teal, indigo_light
 
 from demo import plot
 
@@ -69,59 +69,78 @@ class Gaussian(GaussianPlottingParameters):
         return self.distribution.pdf(self.mu)
 
 
-def plot_gaussian(gaussian, ax):
-    # plot shaded area
-    if gaussian.plot_shaded:
-        ax.fill_between(
-            gaussian.support,
-            0.00175,  # to avoid covering x axis
-            gaussian.pdf,
-            alpha=.3,
-            color=gaussian.color,
-            zorder=5,
-        )
+    def draw(self, ax):
+        # plot shaded area
+        if self.plot_shaded:
+            ax.fill_between(
+                self.support,
+                0.00175,  # to avoid covering x axis
+                self.pdf,
+                alpha=.3,
+                color=self.color,
+                zorder=5,
+            )
 
-    # plot outline
-    plot.elements.plot_line_outlined(
-        ax,
-        gaussian.support, 
-        gaussian.pdf, 
-        color=gaussian.color, 
-        lw=gaussian.lw, 
-        outline=gaussian.outline_width
-        )
-
-    # mark mean
-    if gaussian.mark_mu:
-        plot.elements.vline_to_point(
+        # plot outline
+        plot.elements.plot_line_outlined(
             ax,
-            gaussian.mu,
-            gaussian.peak,
-            mark_bottom=True,
-            color=plot.utils.darken_color(gaussian.color),
-            lw=2,
-            zorder=3,
-            ls='--'
-        )
+            self.support, 
+            self.pdf, 
+            color=self.color, 
+            lw=self.lw, 
+            outline=self.outline_width
+            )
 
-    # label mu
-    if gaussian.mu_label is not None:
-        plot.elements.label_point(
-            ax,
-            gaussian.mu,
-            0,
-            gaussian.mu_label,
-            below=True,
-            color=plot.utils.darken_color(gaussian.color, .3),
-        )
+        # mark mean
+        if self.mark_mu:
+            plot.elements.vline_to_point(
+                ax,
+                self.mu,
+                self.peak,
+                mark_bottom=True,
+                color=plot.utils.darken_color(self.color),
+                lw=2,
+                zorder=3,
+                ls='--'
+            )
 
-    # label gaussian
-    if gaussian.label is not None:
-        plot.elements.label_point(
-            ax,
-            gaussian.mu,
-            gaussian.peak,
-            gaussian.label,
-            right=True if gaussian.label_side == 'left' else False,
-            color=plot.utils.darken_color(gaussian.color, .3),
-        )
+        # label mu
+        if self.mu_label is not None:
+            plot.elements.label_point(
+                ax,
+                self.mu,
+                0,
+                self.mu_label,
+                below=True,
+                color=plot.utils.darken_color(self.color, .3),
+            )
+
+        # label
+        if self.label is not None:
+            plot.elements.label_point(
+                ax,
+                self.mu,
+                self.peak,
+                self.label,
+                right=True if self.label_side == 'left' else False,
+                color=plot.utils.darken_color(self.color, .3),
+            )
+
+class Prior(Gaussian):
+    def __init__(self, mu=0, sigma=1, **kwargs):
+        Gaussian.__init__(self, mu=mu, sigma=sigma, **kwargs)
+        self.color = salmon
+        self.label='prior:  $p_s(S_{hyp})$'
+
+class Likelihood(Gaussian):
+    def __init__(self, mu=0, sigma=1, **kwargs):
+        Gaussian.__init__(self, mu=mu, sigma=sigma, **kwargs)
+        self.color = teal
+        self.label='likelihood:\n  $L(S_{hyp})=p_{x|s}(X_{obs}|S_{hyp})$'
+        self.mu_label='$X_{obs}$'
+
+def Posterior(posterior):
+    posterior.color = indigo_light
+    posterior.label = 'posterior:\n  $p_{s|x}(S_{hyp} | X_{obs})$'  # specify label
+    posterior.mu_label = '$\\hat{S}_{PM}$'  # label x=mu in plot
+    return posterior
